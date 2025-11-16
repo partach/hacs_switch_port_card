@@ -133,10 +133,10 @@ class SwitchPortCard extends HTMLElement {
     if (!this._config.show_legend) return '';
     return `
       <div style="display:flex;gap:12px;font-size:9px;color:#aaa;white-space:nowrap;">
-        <span><span style="color:#ff6b35;">●</span> 10/100/DM</span>
-        <span><span style="color:#4caf50;">●</span> 1G</span>
-        <span><span style="color:#2196f3;">●</span> 10G</span>
-        <span><span style="color:#555;">●</span> Down</span>
+        <span><span style="color:#ff6b35;">■</span> 10/100/DM</span>
+        <span><span style="color:#4caf50;">■</span> 1G</span>
+        <span><span style="color:#2196f3;">■</span> 10G</span>
+        <span><span style="color:#555;">■</span> Down</span>
       </div>`;
   }
 
