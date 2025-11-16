@@ -8,8 +8,9 @@ This Home Assistant card shows the status of your switch ports
 </p>
 
 
-First version is build ons:
+First version is veriefied with:
 Real-time **28-port status** (24 copper + 4 SFP) for Zyxel XGS1935 (and similar) using **direct entity access**.
+But... quite some configurations are possible so will probably work for your switch as well. 
 
 The card is based on and therefor depedent on `SNMP data`. 
 
