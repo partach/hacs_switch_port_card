@@ -69,7 +69,7 @@ When defining 'Sensor entities'
     unique_id: mainswitch_port_speed_x
 ```
 
-When defining 'Switch entities' (put id different yaml as sensor)
+When defining 'Switch entities' (put them in different yaml file as sensor)
 `!!for x=1 to x=the number of ports your switch has!!`
 ```yaml
   - platform: snmp
