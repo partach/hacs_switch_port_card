@@ -81,3 +81,13 @@ When defining 'Switch entities' (put them in different yaml file as sensor)
     version: 2c
     # oh, unique id is not supported for this by HA self...?
 ```
+## using the card example
+```yaml
+type: custom:switch-port-card
+entity_prefix: mainswitch
+total_ports: 28
+sfp_start_port: 25
+copper_label: GIGABIT
+sfp_label: 10G SFP+
+name: Main Switch
+```
