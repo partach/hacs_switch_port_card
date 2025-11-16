@@ -1,8 +1,9 @@
-// ===== MAIN CARD =====
+// ===== SWITCH PORT CARD — FULLY CONFIGURABLE, PRO-GRADE =====
 class SwitchPortCard extends HTMLElement {
   static getConfigElement() {
     return document.createElement("switch-port-card-editor");
   }
+
   static getStubConfig() {
     return {
       entity_prefix: "mainswitch",
@@ -10,7 +11,10 @@ class SwitchPortCard extends HTMLElement {
       sfp_start_port: 25,
       name: "Switch Ports",
       compact_mode: false,
-      entity_port_names: ""
+      entity_port_names: "",
+      entity_port_vlan: "",
+      entity_port_rx: "",
+      entity_port_tx: ""
     };
   }
 
@@ -18,6 +22,7 @@ class SwitchPortCard extends HTMLElement {
     if (!config.entity_prefix) throw new Error("entity_prefix is required");
     if (!config.total_ports) throw new Error("total_ports is required");
     if (!config.sfp_start_port) throw new Error("sfp_start_port is required");
+
     const total = parseInt(config.total_ports, 10);
     const sfpStart = parseInt(config.sfp_start_port, 10);
     if (isNaN(total) || total < 1) throw new Error("total_ports must be a positive number");
@@ -31,6 +36,9 @@ class SwitchPortCard extends HTMLElement {
       show_system_info: false,
       compact_mode: false,
       entity_port_names: '',
+      entity_port_vlan: '',
+      entity_port_rx: '',
+      entity_port_tx: '',
       entity_name: '',
       entity_firmware: '',
       entity_uptime: '',
@@ -51,13 +59,14 @@ class SwitchPortCard extends HTMLElement {
     this._render();
   }
 
-  // === UPGRADE 2: Click → More Info ===
+  // === Click → More Info (Speed Sensor) ===
   _openMoreInfo(entityId) {
     const event = new Event('hass-more-info', { bubbles: true, composed: true });
     event.detail = { entityId };
     this.dispatchEvent(event);
   }
 
+  // === Status for Color Only ===
   _getPortStatus(port) {
     const sw = this._hass?.states[`switch.${this._config.entity_prefix}_port_${port}`];
     const sp = this._hass?.states[`sensor.${this._config.entity_prefix}_port_speed_${port}`];
@@ -81,6 +90,31 @@ class SwitchPortCard extends HTMLElement {
     return entity?.state && !['unknown', 'unavailable', ''].includes(entity.state) ? entity.state : '';
   }
 
+  // === VLAN + Rx + Tx (Configurable Prefixes) ===
+  _getPortStats(port) {
+    const vlan = this._config.entity_port_vlan ? 
+      this._hass?.states[`${this._config.entity_port_vlan}_${port}`] : null;
+    const rx = this._config.entity_port_rx ? 
+      this._hass?.states[`${this._config.entity_port_rx}_${port}`] : null;
+    const tx = this._config.entity_port_tx ? 
+      this._hass?.states[`${this._config.entity_port_tx}_${port}`] : null;
+
+    const formatBytes = (bytes) => {
+      if (!bytes || isNaN(bytes)) return '';
+      const val = parseInt(bytes, 10);
+      if (val >= 1e9) return `${(val / 1e9).toFixed(1)}G`;
+      if (val >= 1e6) return `${(val / 1e6).toFixed(0)}M`;
+      if (val >= 1e3) return `${(val / 1e3).toFixed(0)}K`;
+      return `${val}`;
+    };
+
+    return {
+      vlan: vlan?.state && !['unknown', 'unavailable'].includes(vlan.state) ? vlan.state : '',
+      rx: rx?.state ? formatBytes(rx.state) : '',
+      tx: tx?.state ? formatBytes(tx.state) : ''
+    };
+  }
+
   _getColor(status) {
     if (status === 'DOWN') return '#555';
     if (status === 'UNAVAIL') return '#444';
@@ -97,19 +131,21 @@ class SwitchPortCard extends HTMLElement {
     const opacity = status === 'DOWN' || status === 'UNAVAIL' ? 0.6 : 1;
     const isSfp = i >= this._sfpStart;
     const baseSize = isCompact ? 26 : 30;
-    const height = isSfp ? (isCompact ? 19 : 21) : (isCompact ? 25 : 27);
-    const speedFontSize = isCompact ? 7 : 8;
-    const nameFontSize = 6;
+    const height = isSfp ? (isCompact ? 32 : 38) : (isCompact ? 38 : 44);
     const boxWidth = isCompact ? baseSize : 30;
     const gap = isCompact ? 0 : 1;
 
-    const speedText = status === 'DM' ? 'DM' : (status === 'DOWN' || status === 'UNAVAIL' ? '' : status);
     const portName = this._getPortName(i);
     const showName = portName && portName.length > 0;
+    const { vlan, rx, tx } = this._getPortStats(i);
+    const showVlan = vlan && vlan.length > 0;
+    const showRxTx = rx || tx;
 
     const tooltip = `Port ${i}\n` +
       `Name: ${portName || '—'}\n` +
-      `Status: ${status === 'DM' ? 'Disabled' : status}\n` +
+      `VLAN: ${vlan || '—'}\n` +
+      `Rx: ${rx || '—'}\n` +
+      `Tx: ${tx || '—'}\n` +
       `Switch: switch.${this._config.entity_prefix}_port_${i}\n` +
       `Sensor: sensor.${this._config.entity_prefix}_port_speed_${i}`;
 
@@ -118,15 +154,17 @@ class SwitchPortCard extends HTMLElement {
     return `
       <div style="flex:0 0 ${boxWidth}px;text-align:center;margin:0 ${gap}px;">
         <div style="font-size:${isCompact ? 7 : 8}px;color:#888;margin-bottom:${isCompact ? 1 : 2}px;">${i}</div>
-        <div 
-          style="width:${boxWidth}px;height:${height}px;background:${bg};color:#fff;border-radius:${isCompact ? 5 : 7}px;display:flex;flex-direction:column;justify-content:${showName ? 'space-between' : 'center'};align-items:center;padding:1px 0;opacity:${opacity};cursor:pointer;transition:transform 0.1s ease;"
+        <div
+          style="width:${boxWidth}px;height:${height}px;background:${bg};color:#fff;border-radius:${isCompact ? 5 : 7}px;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:2px 1px;opacity:${opacity};cursor:pointer;transition:transform 0.1s ease;font-size:5.5px;line-height:1.1;"
           title="${tooltip.replace(/\n/g, '&#10;')}"
           onclick="${clickHandler}"
           onmouseenter="this.style.transform='scale(1.08)'"
           onmouseleave="this.style.transform='scale(1)'"
         >
-          <div style="font-size:${speedFontSize}px;font-weight:700;${showName ? 'margin-top:1px;' : ''}">${speedText}</div>
-          ${showName ? `<div style="font-size:${nameFontSize}px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:90%;">${portName}</div>` : ''}
+          ${showVlan ? `<div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:90%;">VLAN: ${vlan}</div>` : ''}
+          ${showRxTx ? `<div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:90%;">Rx: ${rx} Tx: ${tx}</div>` : ''}
+          ${showName ? `<div style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:90%;font-weight:600;">${portName}</div>` : ''}
+          ${!showVlan && !showRxTx && !showName ? `<div style="height:100%;display:flex;align-items:center;">—</div>` : ''}
         </div>
       </div>`;
   }
@@ -166,10 +204,10 @@ class SwitchPortCard extends HTMLElement {
     const gap = isCompact ? 6 : 12;
     return `
       <div style="display:flex;gap:${gap}px;font-size:${fontSize}px;color:#aaa;white-space:nowrap;align-items:center;">
-        <span><span style="color:#ff6b35;">\u23F9</span> 10/100/DM</span>
-        <span><span style="color:#4caf50;">\u23F9</span> 1G</span>
-        <span><span style="color:#2196f3;">\u23F9</span> 10G</span>
-        <span><span style="color:#555;">\u23F9</span> Down</span>
+        <span><span style="color:#ff6b35;">\u25CF</span> 10/100/DM</span>
+        <span><span style="color:#4caf50;">\u25CF</span> 1G</span>
+        <span><span style="color:#2196f3;">\u25CF</span> 10G</span>
+        <span><span style="color:#555;">\u25CF</span> Down</span>
       </div>`;
   }
 
@@ -212,12 +250,10 @@ class SwitchPortCard extends HTMLElement {
           ${memBar}
         </div>`;
     }
-
     const nameEntity = this._hass?.states[this._config.entity_name];
     const firmwareEntity = this._hass?.states[this._config.entity_firmware];
     const uptimeEntity = this._hass?.states[this._config.entity_uptime];
     const infoItems = [];
-
     if (this._config.entity_name && nameEntity) {
       infoItems.push(`
         <div style="display:flex;gap:4px;align-items:center;white-space:nowrap;min-width:0;">
@@ -239,7 +275,6 @@ class SwitchPortCard extends HTMLElement {
           <span style="color:#e8e8e8;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;display:block;max-width:140px;" title="${uptimeEntity.state}">${uptimeEntity.state}</span>
         </div>`);
     }
-
     let bottomSection = '';
     if (infoItems.length > 0) {
       const gap = isCompact ? 12 : 16;
@@ -258,7 +293,7 @@ class SwitchPortCard extends HTMLElement {
       return;
     }
 
-    // === UPGRADE 5: Auto Dark / Light Mode ===
+    // === Auto Dark / Light Mode ===
     const isDark = this._hass.themes?.darkMode ?? false;
     const bg = isDark ? '#1e1e1e' : '#ffffff';
     const text = isDark ? '#e8e8e8' : '#212121';
@@ -306,7 +341,7 @@ class SwitchPortCard extends HTMLElement {
   getCardSize() { return 3; }
 }
 
-// ===== CARD EDITOR (unchanged) =====
+// ===== CARD EDITOR — FULLY CONFIGURABLE =====
 class SwitchPortCardEditor extends HTMLElement {
   setConfig(config) {
     this._config = {
@@ -320,6 +355,9 @@ class SwitchPortCardEditor extends HTMLElement {
       show_system_info: false,
       compact_mode: false,
       entity_port_names: '',
+      entity_port_vlan: '',
+      entity_port_rx: '',
+      entity_port_tx: '',
       entity_name: '',
       entity_firmware: '',
       entity_uptime: '',
@@ -332,6 +370,7 @@ class SwitchPortCardEditor extends HTMLElement {
       this._initialized = true;
     }
   }
+
   set hass(hass) { this._hass = hass; }
 
   _valueChanged(ev) {
@@ -385,11 +424,31 @@ class SwitchPortCardEditor extends HTMLElement {
             <input type="text" data-config="sfp_label" value="${this._config.sfp_label}" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
           </div>
         </div>
+
+        <div style="font-size:16px;font-weight:600;color:#333;border-bottom:2px solid #e0e0e0;padding-bottom:8px;margin-top:8px;">
+          Port Information (Optional)
+        </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
-          <label style="font-weight:500;font-size:14px;">Port Name Entity Prefix (Optional)</label>
+          <label style="font-weight:500;font-size:14px;">Port Name Prefix</label>
           <input type="text" data-config="entity_port_names" value="${this._config.entity_port_names}" placeholder="sensor.mainswitch_port_name" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
           <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_name_1, _2, etc.</div>
         </div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <label style="font-weight:500;font-size:14px;">Port VLAN Prefix</label>
+          <input type="text" data-config="entity_port_vlan" value="${this._config.entity_port_vlan}" placeholder="sensor.mainswitch_port_vlan" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
+          <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_vlan_1, _2, etc.</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <label style="font-weight:500;font-size:14px;">Port RX Prefix</label>
+          <input type="text" data-config="entity_port_rx" value="${this._config.entity_port_rx}" placeholder="sensor.mainswitch_port_rx" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
+          <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_rx_1, _2, etc. (bytes)</div>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <label style="font-weight:500;font-size:14px;">Port TX Prefix</label>
+          <input type="text" data-config="entity_port_tx" value="${this._config.entity_port_tx}" placeholder="sensor.mainswitch_port_tx" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
+          <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_tx_1, _2, etc. (bytes)</div>
+        </div>
+
         <div style="display:flex;align-items:center;gap:8px;">
           <input type="checkbox" data-config="show_legend" ${this._config.show_legend ? 'checked' : ''} style="width:18px;height:18px;cursor:pointer;"/>
           <label style="font-weight:500;font-size:14px;cursor:pointer;">Show Legend</label>
@@ -426,10 +485,16 @@ class SwitchPortCardEditor extends HTMLElement {
           <label style="font-weight:500;font-size:14px;">Uptime Entity</label>
           <input type="text" data-config="entity_uptime" value="${this._config.entity_uptime}" placeholder="sensor.mainswitch_uptime" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
         </div>
+
         <div style="margin-top:8px;padding:12px;background:#f5f5f5;border-radius:4px;font-size:13px;color:#666;">
-          <strong>Required:</strong> switch.${this._config.entity_prefix}_port_[1-${this._config.total_ports}]<br>
-          <strong>Sensor:</strong> sensor.${this._config.entity_prefix}_port_speed_[1-${this._config.total_ports}]<br>
-          <em>Optional: ${this._config.entity_port_names || 'sensor.mainswitch_port_name'}_[1-${this._config.total_ports}]</em>
+          <strong>Required:</strong><br>
+          • switch.${this._config.entity_prefix}_port_[1-${this._config.total_ports}]<br>
+          • sensor.${this._config.entity_prefix}_port_speed_[1-${this._config.total_ports}]<br>
+          <strong>Optional (for full info):</strong><br>
+          • ${this._config.entity_port_names || 'sensor.mainswitch_port_name'}_[1-x]<br>
+          • ${this._config.entity_port_vlan || 'sensor.mainswitch_port_vlan'}_[1-x]<br>
+          • ${this._config.entity_port_rx || 'sensor.mainswitch_port_rx'}_[1-x]<br>
+          • ${this._config.entity_port_tx || 'sensor.mainswitch_port_tx'}_[1-x]
         </div>
       </div>
     `;
