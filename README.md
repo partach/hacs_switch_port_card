@@ -87,10 +87,39 @@ When defining 'Switch entities' (put them in different yaml file as sensor)
     version: 2c
     # oh, unique id is not supported for this by HA self...?
 ```
+## Coniguration options
+See below for more details.
+```
+      name: 'Switch Ports',
+      copper_label: 'COPPER',
+      sfp_label: 'SFP',
+      show_legend: true,
+      show_system_info: false,  (shows card without cpu, mem, etc.)
+      compact_mode: false,   (possible to make the card small for tight dashboards)
+      entity_port_names: '', (port name entities)
+      entity_name: '',    (network switch name entity)
+      entity_firmware: '',  (network switch firmware entity)
+      entity_uptime: '',   (network switch up time entity)
+      entity_cpu: '',   (network switch cpu load entity)
+      entity_memory: ''   (network switch memory load entity)
+```
+## Optional
+**Names**
 
-**Optional**
-You can add extra entities for the card (also get them via SNMP
+`!!for x=1 to x=the number of ports your switch has!!`
+```yaml
+  - platform: snmp
+    name: Mainswitch Port name x
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.x  # this is the Zyxel xgs1935 MIB range!
+    scan_interval: 84600
+    version: 2c
+    unique_id: mainswitch_port_name_x
+```
+You can add even more extra entities for the card (also get them via SNMP)
 
+**the switch model name**
 ```yaml
 # System Name
   - platform: snmp
@@ -102,7 +131,10 @@ You can add extra entities for the card (also get them via SNMP
     accept_errors: true
     unique_id: mainswitch_system_name
     version: 2c
+```
 
+**up time of switch**
+```yaml
   # Uptime (formatted)
   - platform: snmp
     host: !secret snmp_host
@@ -118,8 +150,11 @@ You can add extra entities for the card (also get them via SNMP
       {% set hours = ((value | int / 360000) % 24) | int %}
       {% set mins = ((value | int / 6000) % 60) | int %}
       {{ days }}d {{ hours }}h {{ mins }}m
+```
 
-  # Firmware (extract version)
+**Firmware version information**
+```yaml
+  # Firmware version
   - platform: snmp
     host: !secret snmp_host
     community: !secret snmp_community
@@ -129,7 +164,10 @@ You can add extra entities for the card (also get them via SNMP
     accept_errors: true
     unique_id: mainswitch_system_firmware
     version: 2c
+```
 
+**CPU load of the switch**
+```yaml
   - platform: snmp
     host: !secret snmp_host
     community: !secret snmp_community
@@ -141,7 +179,9 @@ You can add extra entities for the card (also get them via SNMP
     unique_id: Mainswitch_cpu_load
     unit_of_measurement: "%"
     state_class: measurement
-    
+```
+**Memory load of the switch**    
+```yaml
   - platform: snmp
     host: !secret snmp_host
     community: !secret snmp_community
@@ -153,10 +193,10 @@ You can add extra entities for the card (also get them via SNMP
     unique_id: Mainswitch_mem_load
     unit_of_measurement: "%"
     state_class: measurement
-
 ```
 
 ## using the card example
+The card has a configuration screen which can be used in stead...
 ```yaml
 type: custom:switch-port-card
 entity_prefix: mainswitch
