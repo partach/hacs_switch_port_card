@@ -2,7 +2,7 @@
 This Home Assistant card shows the status of your switch ports
 
 <p align="center">
-  <img src="https://github.com/partach/hacs_switch_port_card/blob/main/switch-port-card.png" width="600"/>
+  <img src="https://github.com/partach/hacs_switch_port_card/blob/main/switch-port-card2.png" width="600"/>
   <br>
   <em>Live port status with color coding: 10M/100M (orange), 1G (green), 10G (blue), DOWN (gray)</em>
 </p>
@@ -87,6 +87,75 @@ When defining 'Switch entities' (put them in different yaml file as sensor)
     version: 2c
     # oh, unique id is not supported for this by HA self...?
 ```
+
+**Optional**
+You can add extra entities for the card (also get them via SNMP
+
+```yaml
+# System Name
+  - platform: snmp
+    host: !secret snmp_host
+    community: !secret snmp_community
+    name: Mainswitch Name
+    scan_interval: 86400
+    baseoid: 1.3.6.1.2.1.1.5.0 # not to repeat myself but need to change this to what your switch needs
+    accept_errors: true
+    unique_id: mainswitch_system_name
+    version: 2c
+
+  # Uptime (formatted)
+  - platform: snmp
+    host: !secret snmp_host
+    community: !secret snmp_community
+    name: Mainswitch Uptime
+    scan_interval: 300
+    baseoid: 1.3.6.1.2.1.1.3.0 # not to repeat myself but need to change this to what your switch needs
+    accept_errors: true
+    unique_id: mainswitch_system_uptime
+    version: 2c
+    value_template: >-
+      {% set days = (value | int / 8640000) | int %}
+      {% set hours = ((value | int / 360000) % 24) | int %}
+      {% set mins = ((value | int / 6000) % 60) | int %}
+      {{ days }}d {{ hours }}h {{ mins }}m
+
+  # Firmware (extract version)
+  - platform: snmp
+    host: !secret snmp_host
+    community: !secret snmp_community
+    name: Mainswitch Firmware
+    scan_interval: 86400
+    baseoid: 1.3.6.1.4.1.890.1.15.3.1.6.0 # not to repeat myself but need to change this to what your switch needs
+    accept_errors: true
+    unique_id: mainswitch_system_firmware
+    version: 2c
+
+  - platform: snmp
+    host: !secret snmp_host
+    community: !secret snmp_community
+    version: 2c
+    name: Mainswitch CPU Load
+    baseoid: 1.3.6.1.4.1.890.1.15.3.2.4.0 # not to repeat myself but need to change this to what your switch needs
+    scan_interval: 10
+    accept_errors: true
+    unique_id: Mainswitch_cpu_load
+    unit_of_measurement: "%"
+    state_class: measurement
+    
+  - platform: snmp
+    host: !secret snmp_host
+    community: !secret snmp_community
+    version: 2c
+    name: Mainswitch Mem Load
+    baseoid: 1.3.6.1.4.1.890.1.15.3.2.5.0 # not to repeat myself but need to change this to what your switch needs
+    scan_interval: 10
+    accept_errors: true
+    unique_id: Mainswitch_mem_load
+    unit_of_measurement: "%"
+    state_class: measurement
+
+```
+
 ## using the card example
 ```yaml
 type: custom:switch-port-card
