@@ -118,6 +118,29 @@ See below for more details.
     version: 2c
     unique_id: mainswitch_port_name_x
 ```
+**RX and TX counters**
+(example shows only TX but RX is same setup but off course different oid)
+```yaml
+  - platform: snmp
+    name: Mainswitch Port TX x
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.x # oid for Tx (RX: 1.3.6.1.2.1.2.2.1.10.x)
+    version: 2c
+    unique_id: mainswitch_port_tx_x
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+```
+
 You can add even more extra entities for the card (also get them via SNMP)
 
 **the switch model name**
