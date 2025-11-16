@@ -1,6 +1,13 @@
 # hacs_switch_port_card
 This Home Assistant card shows the status of your switch ports
 
+<p align="center">
+  <img src="https://github.com/partach/hacs_switch_port_card/blob/main/switch-port-card.png" width="600"/>
+  <br>
+  <em>Live port status with color coding: 10M/100M (orange), 1G (green), 10G (blue), DOWN (gray)</em>
+</p>
+
+
 Goal is to at some point make a switch card suitable for multiple switches.
 First version supports:
 Real-time **28-port status** (24 copper + 4 SFP) for Zyxel XGS1935 (and similar) using **direct entity access**.
