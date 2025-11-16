@@ -2,7 +2,7 @@
 This Home Assistant card shows the status of your switch ports
 
 <p align="center">
-  <img src="https://github.com/partach/hacs_switch_port_card/blob/main/switch-port-card2.png" width="600"/>
+  <img src="https://github.com/partach/hacs_switch_port_card/blob/main/switch-port-card3.png" width="600"/>
   <br>
   <em>Live port status with color coding: 10M/100M (orange), 1G (green), 10G (blue), DOWN (gray)</em>
 </p>
