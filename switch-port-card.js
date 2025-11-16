@@ -55,7 +55,7 @@ class SwitchPortCard extends HTMLElement {
     const speedVal = speedStr && !['unknown', 'unavailable', ''].includes(speedStr) ? parseInt(speedStr, 10) : NaN;
     if (!isUp) return 'DOWN';
     if (isNaN(speedVal) || speedVal <= 0) return 'DM';
-    if (speedVal >= 10000000000) return '10G';
+    if (speedVal >= 4000000000) return '10G';
     if (speedVal >= 1000000000) return '1G';
     if (speedVal >= 100000000) return '100M';
     if (speedVal >= 10000000) return '10M';
