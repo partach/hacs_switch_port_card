@@ -80,4 +80,5 @@ When defining 'Switch entities' (put id different yaml as sensor)
     payload_on: 1   # when using a switch entity this is automatically set to 'on'
     payload_off: 2 # when using a switch entity this is automatically set to 'off'
     version: 2c
+    # oh, unique id is not supported for this by HA self...?
 ```
