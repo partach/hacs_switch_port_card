@@ -15,13 +15,13 @@ Example (use your own / extend to your own):
 switch: !include snmp_switch_entities.yaml 
 sensor: !include config_sensors.yaml
 ```
-
+(below the is explained how to add the entities)
 
 
 IMPORTANT2: SNMP requires the right baseoid for getting the right data.
 This baseoid is often manufacturer dependent. 
 So, when defining your sensor / switch entities make sure to check if the baseoid matches the needed 'field'
-
+(see below for details)
 
 ## Features
 - Auto-detects `10M`, `100M`, `1G`, `10G`, `DM`(Downsteam Mode), `DOWN`
