@@ -235,8 +235,8 @@ class SwitchPortCardEditor extends HTMLElement {
           <label style="font-weight:500;font-size:14px;">Card Name</label>
           <input
             type="text"
-            .configValue=${'name'}
-            .value="${this._config.name}"
+            data-config="name"
+            value="${this._config.name}"
             style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"
           />
         </div>
@@ -245,8 +245,8 @@ class SwitchPortCardEditor extends HTMLElement {
           <label style="font-weight:500;font-size:14px;">Entity Prefix</label>
           <input
             type="text"
-            .configValue=${'entity_prefix'}
-            .value="${this._config.entity_prefix}"
+            data-config="entity_prefix"
+            value="${this._config.entity_prefix}"
             style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"
           />
           <div style="font-size:12px;color:#666;">
@@ -261,8 +261,8 @@ class SwitchPortCardEditor extends HTMLElement {
               type="number"
               min="1"
               max="256"
-              .configValue=${'total_ports'}
-              .value="${this._config.total_ports}"
+              data-config="total_ports"
+              value="${this._config.total_ports}"
               style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"
             />
           </div>
@@ -273,8 +273,8 @@ class SwitchPortCardEditor extends HTMLElement {
               type="number"
               min="1"
               max="256"
-              .configValue=${'sfp_start_port'}
-              .value="${this._config.sfp_start_port}"
+              data-config="sfp_start_port"
+              value="${this._config.sfp_start_port}"
               style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"
             />
           </div>
@@ -285,8 +285,8 @@ class SwitchPortCardEditor extends HTMLElement {
             <label style="font-weight:500;font-size:14px;">Copper Label</label>
             <input
               type="text"
-              .configValue=${'copper_label'}
-              .value="${this._config.copper_label}"
+              data-config="copper_label"
+              value="${this._config.copper_label}"
               style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"
             />
           </div>
@@ -295,8 +295,8 @@ class SwitchPortCardEditor extends HTMLElement {
             <label style="font-weight:500;font-size:14px;">SFP Label</label>
             <input
               type="text"
-              .configValue=${'sfp_label'}
-              .value="${this._config.sfp_label}"
+              data-config="sfp_label"
+              value="${this._config.sfp_label}"
               style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"
             />
           </div>
@@ -305,8 +305,8 @@ class SwitchPortCardEditor extends HTMLElement {
         <div style="display:flex;align-items:center;gap:8px;">
           <input
             type="checkbox"
-            .configValue=${'show_legend'}
-            ?checked="${this._config.show_legend}"
+            data-config="show_legend"
+            ${this._config.show_legend ? 'checked' : ''}
             style="width:18px;height:18px;cursor:pointer;"
           />
           <label style="font-weight:500;font-size:14px;cursor:pointer;">Show Legend</label>
