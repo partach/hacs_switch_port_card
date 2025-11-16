@@ -13,7 +13,7 @@ Example (use your own / extend to your own):
 
 ```yaml
 switch: !include snmp_switch_entities.yaml 
-sensor: !include config_sensors.yam
+sensor: !include config_sensors.yaml
 ```
 
 
