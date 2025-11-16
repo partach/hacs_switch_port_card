@@ -1,5 +1,5 @@
 {
   "name": "Switch Port Status Card",
   "render_readme": true,
-  "filename": "hacs-switch-port-card.js"
+  "filename": "switch-port-card.js"
 }
