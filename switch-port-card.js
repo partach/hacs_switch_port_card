@@ -133,10 +133,10 @@ class SwitchPortCard extends HTMLElement {
     if (!this._config.show_legend) return '';
     return `
       <div style="display:flex;gap:12px;font-size:9px;color:#aaa;white-space:nowrap;">
-        <span><span style="color:#ff6b35;">■</span> 10/100/DM</span>
-        <span><span style="color:#4caf50;">■</span> 1G</span>
-        <span><span style="color:#2196f3;">■</span> 10G</span>
-        <span><span style="color:#555;">■</span> Down</span>
+        <span><span style="color:#ff6b35;">\u25CF</span> 10/100/DM</span>
+        <span><span style="color:#4caf50;">\u25CF</span> 1G</span>
+        <span><span style="color:#2196f3;">\u25CF</span> 10G</span>
+        <span><span style="color:#555;">\u25CF</span> Down</span>
       </div>`;
   }
 
@@ -192,7 +192,11 @@ class SwitchPortCardEditor extends HTMLElement {
       show_legend: true,
       ...config
     };
-    this._render();
+    // Only render once on initial setup
+    if (!this._initialized) {
+      this._render();
+      this._initialized = true;
+    }
   }
 
   set hass(hass) {
@@ -203,7 +207,7 @@ class SwitchPortCardEditor extends HTMLElement {
     if (!this._config || !this._hass) return;
 
     const target = ev.target;
-    const configValue = target.configValue;
+    const configValue = target.getAttribute('data-config');
     let value = target.value;
 
     // Handle different input types
