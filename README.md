@@ -29,18 +29,17 @@ So, when defining your sensor / switch entities make sure to check if the baseoi
 - Works with any `switch.xxx_port_X` + `sensor.xxx_port_speed_X`
 
 ## Installation
-1. Install in first instance is by hand by placing the `switch-port-card.js` file in `www/` directory
+1. Install in first instance is by hand by placing the `switch-port-card.js` file in `www\community\` directory (make subdir switch-port-card and put it there)
 
     * In HA go to Settings > Dashboards > Resources
     * Add: 
-      * URL: `/local/switch-port-card.js`
+      * URL: `/local/community/switch-port-card/switch-port-card.js`
       * Type: `JavaScript Module`
 
 2. Add to Lovelace:
-
+Only for those doing it the old way (above way is better)
 ```yaml
 type: custom:switch-port-card
-entity_prefix: mainswitch
 name: Main Switch
 ```
 ## Preparing your switch
