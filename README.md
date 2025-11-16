@@ -24,7 +24,7 @@ So, when defining your sensor / switch entities make sure to check if the baseoi
 
 
 ## Features
-- Auto-detects `10M`, `100M`, `1G`, `10G`, `DM`, `DOWN`
+- Auto-detects `10M`, `100M`, `1G`, `10G`, `DM`(Downsteam Mode), `DOWN`
 - Responsive, no clipping
 - Works with any `switch.xxx_port_X` + `sensor.xxx_port_speed_X`
 
