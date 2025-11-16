@@ -9,7 +9,8 @@ class SwitchPortCard extends HTMLElement {
       total_ports: 28,
       sfp_start_port: 25,
       name: "Switch Ports",
-      compact_mode: false
+      compact_mode: false,
+      port_name_prefix: ""  // e.g., "sensor.mainswitch_port_name"
     };
   }
 
@@ -29,6 +30,7 @@ class SwitchPortCard extends HTMLElement {
       show_legend: true,
       show_system_info: false,
       compact_mode: false,
+      port_name_prefix: '',
       entity_name: '',
       entity_firmware: '',
       entity_uptime: '',
@@ -65,6 +67,13 @@ class SwitchPortCard extends HTMLElement {
     return 'UP';
   }
 
+  _getPortName(port) {
+    if (!this._config.port_name_prefix) return '';
+    const entityId = `${this._config.port_name_prefix}_${port}`;
+    const entity = this._hass?.states[entityId];
+    return entity?.state && !['unknown', 'unavailable', ''].includes(entity.state) ? entity.state : '';
+  }
+
   _getColor(status) {
     if (status === 'DOWN') return '#555';
     if (status === 'UNAVAIL') return '#444';
@@ -80,25 +89,23 @@ class SwitchPortCard extends HTMLElement {
     const isCompact = this._config.compact_mode;
     const opacity = status === 'DOWN' || status === 'UNAVAIL' ? 0.6 : 1;
     const isSfp = i >= this._sfpStart;
-
     const baseSize = isCompact ? 28 : 31;
-    const height = isSfp 
-      ? (isCompact ? 16 : 21) 
-      : (isCompact ? 22 : 27);
-    const fontSize = isCompact 
-      ? (isSfp ? 8 : 7) 
-      : (isSfp ? 9 : 8);
+    const height = isSfp ? (isCompact ? 16 : 21) : (isCompact ? 22 : 27);
+    const speedFontSize = isCompact ? 7 : 8;
+    const nameFontSize = 6;  // ← 6px in BOTH modes
     const boxWidth = isCompact ? baseSize : 31;
     const gap = isCompact ? 1 : 1;
 
-    const text = status === 'DM' ? 'DM' : 
-                 (status === 'DOWN' || status === 'UNAVAIL' ? '' : status);
+    const speedText = status === 'DM' ? 'DM' : (status === 'DOWN' || status === 'UNAVAIL' ? '' : status);
+    const portName = this._getPortName(i);
+    const showName = portName && portName.length > 0;
 
     return `
       <div style="flex:0 0 ${boxWidth}px;text-align:center;margin:0 ${gap}px;">
         <div style="font-size:${isCompact ? 7 : 8}px;color:#888;margin-bottom:${isCompact ? 1 : 2}px;">${i}</div>
-        <div style="width:${boxWidth}px;height:${height}px;background:${bg};color:#fff;border-radius:${isCompact ? 5 : 7}px;display:flex;align-items:center;justify-content:center;font-size:${fontSize}px;font-weight:700;opacity:${opacity};">
-          ${text}
+        <div style="width:${boxWidth}px;height:${height}px;background:${bg};color:#fff;border-radius:${isCompact ? 5 : 7}px;display:flex;flex-direction:column;justify-content:${showName ? 'space-between' : 'center'};align-items:center;padding:1px 0;opacity:${opacity};">
+          <div style="font-size:${speedFontSize}px;font-weight:700;${showName ? 'margin-top:1px;' : ''}">${speedText}</div>
+          ${showName ? `<div style="font-size:${nameFontSize}px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;width:90%;">${portName}</div>` : ''}
         </div>
       </div>`;
   }
@@ -124,7 +131,6 @@ class SwitchPortCard extends HTMLElement {
     const labelSize = isCompact ? 9 : 10;
     const gap = isCompact ? 2 : 3;
     const marginRight = isCompact ? 3 : 4;
-
     let html = `<div style="display:flex;align-items:center;gap:${gap}px;flex-wrap:nowrap;">`;
     html += `<div style="font-size:${labelSize}px;color:#999;font-weight:600;margin-right:${marginRight}px;white-space:nowrap;">${this._config.sfp_label}</div>`;
     this._sfpPorts.forEach(p => html += this._renderPort(p, this._getPortStatus(p)));
@@ -137,14 +143,12 @@ class SwitchPortCard extends HTMLElement {
     const isCompact = this._config.compact_mode;
     const fontSize = isCompact ? 7 : 9;
     const gap = isCompact ? 6 : 12;
-    const dotSize = isCompact ? 'font-size:8px;' : '';
-
     return `
       <div style="display:flex;gap:${gap}px;font-size:${fontSize}px;color:#aaa;white-space:nowrap;align-items:center;">
-        <span style="${dotSize}"><span style="color:#ff6b35;">\u25CF</span> 10/100/DM</span>
-        <span style="${dotSize}"><span style="color:#4caf50;">\u25CF</span> 1G</span>
-        <span style="${dotSize}"><span style="color:#2196f3;">\u25CF</span> 10G</span>
-        <span style="${dotSize}"><span style="color:#555;">\u25CF</span> Down</span>
+        <span><span style="color:#ff6b35;">\u25CF</span> 10/100/DM</span>
+        <span><span style="color:#4caf50;">\u25CF</span> 1G</span>
+        <span><span style="color:#2196f3;">\u25CF</span> 10G</span>
+        <span><span style="color:#555;">\u25CF</span> Down</span>
       </div>`;
   }
 
@@ -154,17 +158,14 @@ class SwitchPortCard extends HTMLElement {
     const value = entity ? parseFloat(entity.state) : 0;
     const validValue = isNaN(value) ? 0 : Math.min(100, Math.max(0, value));
     const isCompact = this._config.compact_mode;
-
     let color = '#4caf50';
     if (validValue >= 90) color = '#f44336';
     else if (validValue >= 75) color = '#ff9800';
     else if (validValue >= 50) color = '#ffc107';
-
     const height = isCompact ? 13 : 16;
     const fontSize = isCompact ? 9 : 10;
     const minWidth = isCompact ? 75 : 150;
     const maxWidth = isCompact ? 185 : 200;
-
     return `
       <div style="flex:1;min-width:${minWidth}px;max-width:${maxWidth}px;">
         <div style="font-size:${isCompact ? 9 : 10}px;color:#999;margin-bottom:${isCompact ? 2 : 4}px;font-weight:600;white-space:nowrap;">${label}</div>
@@ -182,7 +183,6 @@ class SwitchPortCard extends HTMLElement {
     const cpuBar = this._renderBarGauge(this._config.entity_cpu, 'CPU');
     const memBar = this._renderBarGauge(this._config.entity_memory, 'MEMORY');
     const isCompact = this._config.compact_mode;
-
     let topSection = '';
     if (cpuBar || memBar) {
       topSection = `
@@ -191,7 +191,6 @@ class SwitchPortCard extends HTMLElement {
           ${memBar}
         </div>`;
     }
-
     const nameEntity = this._hass?.states[this._config.entity_name];
     const firmwareEntity = this._hass?.states[this._config.entity_firmware];
     const uptimeEntity = this._hass?.states[this._config.entity_uptime];
@@ -220,13 +219,11 @@ class SwitchPortCard extends HTMLElement {
       this.innerHTML = `<ha-card><div style="padding:20px;text-align:center;color:#aaa;">Loading...</div></ha-card>`;
       return;
     }
-
     const isCompact = this._config.compact_mode;
     const systemInfo = this._renderSystemInfo();
     const legend = this._renderLegend();
     const copper = this._renderCopperRows();
     const sfp = this._renderSfp();
-
     let middleRow = '';
     if (legend || sfp) {
       middleRow = `<div style="display:flex;justify-content:center;align-items:center;margin-top:${isCompact ? 2 : 4}px;gap:${isCompact ? 8 : 12}px;flex-wrap:nowrap;">`;
@@ -234,7 +231,6 @@ class SwitchPortCard extends HTMLElement {
       if (sfp) middleRow += `<div style="flex-shrink:0;margin-left:auto;">${sfp}</div>`;
       middleRow += `</div>`;
     }
-
     this.innerHTML = `
       <ha-card style="padding:${isCompact ? '10px 50px 12px' : '14px 30px 16px'};background:#1e1e1e;border-radius:14px;box-shadow:0 5px 14px rgba(0,0,0,0.45);border:1px solid #333;font-family:system-ui,-apple-system,'Segoe UI','Roboto',sans-serif;overflow:visible;min-width:0;">
         <div style="font-size:${isCompact ? 16 : 18}px;font-weight:600;color:#e8e8e8;margin-bottom:${isCompact ? 8 : 12}px;text-align:center;">
@@ -265,6 +261,7 @@ class SwitchPortCardEditor extends HTMLElement {
       show_legend: true,
       show_system_info: false,
       compact_mode: false,
+      port_name_prefix: '',
       entity_name: '',
       entity_firmware: '',
       entity_uptime: '',
@@ -284,12 +281,10 @@ class SwitchPortCardEditor extends HTMLElement {
     const target = ev.target;
     const configValue = target.getAttribute('data-config');
     if (!configValue) return;
-
     let value = target.value;
     if (target.type === 'number') value = parseInt(value, 10);
     else if (target.type === 'checkbox') value = target.checked;
     if (this._config[configValue] === value) return;
-
     this._config = { ...this._config, [configValue]: value };
     const event = new Event('config-changed', { bubbles: true, composed: true });
     event.detail = { config: this._config };
@@ -339,6 +334,16 @@ class SwitchPortCardEditor extends HTMLElement {
                    style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
           </div>
         </div>
+
+        <!-- PORT NAME PREFIX IN BASIC SETTINGS -->
+        <div style="display:flex;flex-direction:column;gap:4px;">
+          <label style="font-weight:500;font-size:14px;">Port Name Entity Prefix (Optional)</label>
+          <input type="text" data-config="port_name_prefix" value="${this._config.port_name_prefix}"
+                 placeholder="sensor.mainswitch_port_name"
+                 style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
+          <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_name_1, _2, etc.</div>
+        </div>
+
         <div style="display:flex;align-items:center;gap:8px;">
           <input type="checkbox" data-config="show_legend" ${this._config.show_legend ? 'checked' : ''}
                  style="width:18px;height:18px;cursor:pointer;"/>
@@ -391,7 +396,8 @@ class SwitchPortCardEditor extends HTMLElement {
         <div style="margin-top:8px;padding:12px;background:#f5f5f5;border-radius:4px;font-size:13px;color:#666;">
           <strong>Required port entities:</strong><br>
           • switch.${this._config.entity_prefix}_port_[1-${this._config.total_ports}]<br>
-          • sensor.${this._config.entity_prefix}_port_speed_[1-${this._config.total_ports}]
+          • sensor.${this._config.entity_prefix}_port_speed_[1-${this._config.total_ports}]<br>
+          <em>Optional: ${this._config.port_name_prefix || 'sensor.mainswitch_port_name'}_1, _2, ...</em>
         </div>
       </div>
     `;
