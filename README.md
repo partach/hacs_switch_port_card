@@ -33,7 +33,7 @@ So, when defining your sensor / switch entities make sure to check if the baseoi
 ## Features
 - Auto-detects `10M`, `100M`, `1G`, `10G`, `DM`(Downsteam Mode), `DOWN`
 - Responsive, no clipping
-- Works with any `switch.xxx_port_X` + `sensor.xxx_port_speed_X`
+- Works with defined status and speed entities `switch.mainswitch_port_X` + `sensor.mainswitch_port_speed_X` (see below) 
 
 ## Installation
 1. Install in first instance is by hand by placing the `switch-port-card.js` file in `www\community\` directory (make subdir switch-port-card and put it there)
