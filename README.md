@@ -8,13 +8,12 @@ This Home Assistant card shows the status of your switch ports
 </p>
 
 
-Goal is to at some point make a switch card suitable for multiple switches.
-First version supports:
+First version is build ons:
 Real-time **28-port status** (24 copper + 4 SFP) for Zyxel XGS1935 (and similar) using **direct entity access**.
 
-The card is based on and therefor depedent on SNMP data. 
+The card is based on and therefor depedent on `SNMP data`. 
 
-IMPORTANT1: You must add snmp entities in your configuration.yaml for it to work.
+**IMPORTANT 1**: You must add snmp entities in your configuration.yaml for it to work.
 Tip: Add only files where you store your sensor entities and or switch (not meaning a network switch) entities to configuration.yaml.
 Example (use your own / extend to your own):
 
@@ -22,10 +21,10 @@ Example (use your own / extend to your own):
 switch: !include snmp_switch_entities.yaml 
 sensor: !include config_sensors.yaml
 ```
-(below the is explained how to add the entities)
+(below is explained how to add the entities)
 
 
-IMPORTANT2: SNMP requires the right baseoid for getting the right data.
+**IMPORTANT 2**: SNMP requires the right baseoid for getting the right data.
 This baseoid is often manufacturer dependent. 
 So, when defining your sensor / switch entities make sure to check if the baseoid matches the needed 'field'
 (see below for details)
