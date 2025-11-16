@@ -196,19 +196,19 @@ class SwitchPortCard extends HTMLElement {
     const uptimeEntity = this._hass?.states[this._config.entity_uptime];
     const infoItems = [];
     if (this._config.entity_name && nameEntity) {
-      infoItems.push(`<span style="color:#aaa;">Name:</span> <span style="color:#e8e8e8;">${nameEntity.state}</span>`);
+      infoItems.push(`<span style="color:#aaa;white-space:nowrap;">Name:</span> <span style="color:#e8e8e8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:120px;display:inline-block;" title="${nameEntity.state}">${nameEntity.state}</span>`);
     }
     if (this._config.entity_firmware && firmwareEntity) {
-      infoItems.push(`<span style="color:#aaa;">FW:</span> <span style="color:#e8e8e8;">${firmwareEntity.state}</span>`);
+      infoItems.push(`<span style="color:#aaa;white-space:nowrap;">FW:</span> <span style="color:#e8e8e8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:80px;display:inline-block;" title="${firmwareEntity.state}">${firmwareEntity.state}</span>`);
     }
     if (this._config.entity_uptime && uptimeEntity) {
-      infoItems.push(`<span style="color:#aaa;">Uptime:</span> <span style="color:#e8e8e8;">${uptimeEntity.state}</span>`);
+      infoItems.push(`<span style="color:#aaa;white-space:nowrap;">Uptime:</span> <span style="color:#e8e8e8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100px;display:inline-block;" title="${uptimeEntity.state}">${uptimeEntity.state}</span>`);
     }
     let bottomSection = '';
     if (infoItems.length > 0) {
       bottomSection = `
-        <div style="display:flex;gap:${isCompact ? 12 : 16}px;font-size:${isCompact ? 8 : 9}px;margin-top:${isCompact ? 6 : 8}px;padding-top:${isCompact ? 6 : 8}px;border-top:1px solid #333;flex-wrap:wrap;justify-content:center;">
-          ${infoItems.join('<span style="color:#555;margin:0 4px;">|</span>')}
+        <div style="display:flex;gap:${isCompact ? 8 : 12}px;font-size:${isCompact ? 7 : 8}px;margin-top:${isCompact ? 4 : 6}px;padding-top:${isCompact ? 4 : 6}px;border-top:1px solid #333;overflow:hidden;white-space:nowrap;flex-wrap:nowrap;justify-content:center;align-items:center;">
+          ${infoItems.join('<span style="color:#555;margin:0 6px;opacity:0.7;">|</span>')}
         </div>`;
     }
     return { top: topSection, bottom: bottomSection };
@@ -341,7 +341,7 @@ class SwitchPortCardEditor extends HTMLElement {
           <input type="text" data-config="entity_port_names" value="${this._config.entity_port_names}"
                  placeholder="sensor.mainswitch_port_name"
                  style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
-          <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_name_1, _2, etc.</div>
+          <div style="font-size:12px;color:#666;">sensor.mainswitch_port_name ... [1-x], etc.</div>
         </div>
 
         <div style="display:flex;align-items:center;gap:8px;">
@@ -397,7 +397,7 @@ class SwitchPortCardEditor extends HTMLElement {
           <strong>Required port entities:</strong><br>
           • switch.${this._config.entity_prefix}_port_[1-${this._config.total_ports}]<br>
           • sensor.${this._config.entity_prefix}_port_speed_[1-${this._config.total_ports}]<br>
-          <em>Optional: ${this._config.entity_port_names || 'sensor.mainswitch_port_name'}_1, _2, ...</em>
+          <em>Optional: ${this._config.entity_port_names || 'sensor.mainswitch_port_name'}_[1-${this._config.total_ports}]</em>
         </div>
       </div>
     `;
