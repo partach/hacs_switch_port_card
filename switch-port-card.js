@@ -10,7 +10,7 @@ class SwitchPortCard extends HTMLElement {
       sfp_start_port: 25,
       name: "Switch Ports",
       compact_mode: false,
-      port_name_prefix: ""  // e.g., "sensor.mainswitch_port_name"
+      entity_port_names: ""  // e.g., "sensor.mainswitch_port_name"
     };
   }
 
@@ -30,7 +30,7 @@ class SwitchPortCard extends HTMLElement {
       show_legend: true,
       show_system_info: false,
       compact_mode: false,
-      port_name_prefix: '',
+      entity_port_names: '',
       entity_name: '',
       entity_firmware: '',
       entity_uptime: '',
@@ -68,8 +68,8 @@ class SwitchPortCard extends HTMLElement {
   }
 
   _getPortName(port) {
-    if (!this._config.port_name_prefix) return '';
-    const entityId = `${this._config.port_name_prefix}_${port}`;
+    if (!this._config.entity_port_names) return '';
+    const entityId = `${this._config.entity_port_names}_${port}`;
     const entity = this._hass?.states[entityId];
     return entity?.state && !['unknown', 'unavailable', ''].includes(entity.state) ? entity.state : '';
   }
@@ -261,7 +261,7 @@ class SwitchPortCardEditor extends HTMLElement {
       show_legend: true,
       show_system_info: false,
       compact_mode: false,
-      port_name_prefix: '',
+      entity_port_names: '',
       entity_name: '',
       entity_firmware: '',
       entity_uptime: '',
@@ -338,7 +338,7 @@ class SwitchPortCardEditor extends HTMLElement {
         <!-- PORT NAME PREFIX IN BASIC SETTINGS -->
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-weight:500;font-size:14px;">Port Name Entity Prefix (Optional)</label>
-          <input type="text" data-config="port_name_prefix" value="${this._config.port_name_prefix}"
+          <input type="text" data-config="entity_port_names" value="${this._config.entity_port_names}"
                  placeholder="sensor.mainswitch_port_name"
                  style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
           <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_name_1, _2, etc.</div>
@@ -397,7 +397,7 @@ class SwitchPortCardEditor extends HTMLElement {
           <strong>Required port entities:</strong><br>
           • switch.${this._config.entity_prefix}_port_[1-${this._config.total_ports}]<br>
           • sensor.${this._config.entity_prefix}_port_speed_[1-${this._config.total_ports}]<br>
-          <em>Optional: ${this._config.port_name_prefix || 'sensor.mainswitch_port_name'}_1, _2, ...</em>
+          <em>Optional: ${this._config.entity_port_names || 'sensor.mainswitch_port_name'}_1, _2, ...</em>
         </div>
       </div>
     `;
