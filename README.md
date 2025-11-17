@@ -89,7 +89,7 @@ When defining 'Switch entities' (put them in different yaml file as sensor)
     # oh, unique id is not supported for this by HA self...?
 ```
 ## Coniguration options
-See below for more details.
+The card comes with a configuration dialog that guides the instalation in HA. See below for more details.
 ```
       name: 'Switch Ports',
       copper_label: 'COPPER',
