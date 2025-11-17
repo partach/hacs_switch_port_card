@@ -97,12 +97,17 @@ See below for more details.
       show_legend: true,
       show_system_info: false,  (shows card without cpu, mem, etc.)
       compact_mode: false,   (possible to make the card small for tight dashboards)
-      entity_port_names: '', (port name entities)
+      entity_port_names: '', (port name entitiy prefix)
       entity_name: '',    (network switch name entity)
       entity_firmware: '',  (network switch firmware entity)
       entity_uptime: '',   (network switch up time entity)
       entity_cpu: '',   (network switch cpu load entity)
       entity_memory: ''   (network switch memory load entity)
+      entity_port_names: '', (network switch port name entity prefix)
+      entity_port_vlan: '', (network switch vlan info port entity prefix)
+      entity_port_rx: '', (network switch rx info port entity prefix)
+      entity_port_tx: '', (network switch tx info port entity prefix)
+
 ```
 ## Optional
 **Names**
