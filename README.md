@@ -37,9 +37,12 @@ So, when defining your sensor / switch entities make sure to check if the baseoi
 (see below for details)
 
 ## Features
-- Auto-detects `10M`, `100M`, `1G`, `10G`, `DM`(Downsteam Mode), `DOWN`
-- Responsive, no clipping
-- Works with defined status and speed entities `switch.mainswitch_port_X` + `sensor.mainswitch_port_speed_X` (see below) 
+- Indication of `10M`, `100M`, `1G`, `10G`, `DM`(Downsteam Mode), `DOWN`
+- Optional indication of port name, vlan id, Rx speed, Tx speed
+- Cpu load and memory load indication (optional as well)
+- Compact mode (for smaller dashboards)
+- Configuration screen
+- Works with defined entities `switch.mainswitch_port_X` + `sensor.mainswitch_port_speed_X` + optional (see below) 
 
 ## Installation
 1. Install in first instance is by hand by placing the `switch-port-card.js` file in `www\community\` directory (make subdir switch-port-card and put it there)
