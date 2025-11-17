@@ -1,5 +1,6 @@
 # hacs_switch_port_card
-This Home Assistant card shows the status of your switch ports
+This Home Assistant card shows the status of your switch ports.
+BE WARNED: requires some manual actions in HA and your switch...
 
 <p align="center">
   <img src="https://github.com/partach/hacs_switch_port_card/blob/main/switch-port-card3.png" width="600"/>
@@ -22,7 +23,12 @@ Example (use your own / extend to your own):
 switch: !include snmp_switch_entities.yaml 
 sensor: !include config_sensors.yaml
 ```
-(below is explained how to add the entities)
+I have done the leg work and attached both files as example in the code (see code list in github).
+  - Just download them and place them in your HA config directory where also configuration.yaml lives
+  - it consist of 28 ports (so adjust to what you need)
+  - You need to define the secret variables use yourself in your secrets.yaml...
+  - basoid needs to be changed to what your switch needs (some are standard accross them, some are definitly not)
+Below is explained how to add the entities one by one if you want to
 
 
 **IMPORTANT 2**: SNMP requires the right baseoid for getting the right data.
