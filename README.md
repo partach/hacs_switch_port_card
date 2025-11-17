@@ -26,7 +26,7 @@ sensor: !include config_sensors.yaml
 I have done the leg work and attached both files as example in the code (see code list in github).
   - Just download them and place them in your HA config directory where also configuration.yaml lives
   - it consist of 28 ports (so adjust to what you need)
-  - You need to define the secret variables use yourself in your secrets.yaml...
+  - You need to define the !secret variables use yourself in your secrets.yaml...
   - basoid needs to be changed to what your switch needs (some are standard accross them, some are definitly not)
 Below is explained how to add the entities one by one if you want to
 
@@ -41,8 +41,10 @@ So, when defining your sensor / switch entities make sure to check if the baseoi
 - Optional indication of port name, vlan id, Rx speed, Tx speed
 - Cpu load and memory load indication (optional as well)
 - Compact mode (for smaller dashboards)
+- Hover Tooltip per port showing status details per port
 - Configuration screen
-- Works with defined entities `switch.mainswitch_port_X` + `sensor.mainswitch_port_speed_X` + optional (see below) 
+- Works with defined entities `switch.mainswitch_port_X` + `sensor.mainswitch_port_speed_X` + optional (see below)
+- Dark / Light Mode
 
 ## Installation
 1. Install in first instance is by hand by placing the `switch-port-card.js` file in `www\community\` directory (make subdir switch-port-card and put it there)
@@ -100,24 +102,28 @@ When defining 'Switch entities' (put them in different yaml file as sensor)
 ## Coniguration options
 The card comes with a configuration dialog that guides the instalation in HA. See below for more details.
 ```
-      name: 'Switch Ports',
-      copper_label: 'COPPER',
-      sfp_label: 'SFP',
+      name: 'Switch Ports'
+      copper_label: 'COPPER'
+      sfp_label: 'SFP'
       show_legend: true,
-      show_system_info: false,  (shows card without cpu, mem, etc.)
-      compact_mode: false,   (possible to make the card small for tight dashboards)
-      entity_port_names: '', (port name entitiy prefix)
-      entity_name: '',    (network switch name entity)
-      entity_firmware: '',  (network switch firmware entity)
-      entity_uptime: '',   (network switch up time entity)
-      entity_cpu: '',   (network switch cpu load entity)
+      show_system_info: false  (shows card without cpu, mem, etc.)
+      compact_mode: false   (possible to make the card small for tight dashboards)
+      entity_port_names: '' (port name entitiy prefix)
+      entity_name: ''    (network switch name entity)
+      entity_firmware: ''  (network switch firmware entity)
+      entity_uptime: ''   (network switch up time entity)
+      entity_cpu: ''   (network switch cpu load entity)
       entity_memory: ''   (network switch memory load entity)
-      entity_port_names: '', (network switch port name entity prefix)
-      entity_port_vlan: '', (network switch vlan info port entity prefix)
-      entity_port_rx: '', (network switch rx info port entity prefix)
-      entity_port_tx: '', (network switch tx info port entity prefix)
+      entity_port_names: '' (network switch port name entity prefix)
+      entity_port_vlan: '' (network switch vlan info port entity prefix)
+      entity_port_rx: '' (network switch rx info port entity prefix)
+      entity_port_tx: '' (network switch tx info port entity prefix)
 
 ```
+## Required Entities
+switch.mainswitch_port_1 to 28 (status)
+sensor.mainswitch_port_speed_1 to 28 (speed in bps)
+
 ## Optional
 **Names**
 
@@ -236,11 +242,26 @@ You can add even more extra entities for the card (also get them via SNMP)
 ## using the card example
 The card has a configuration screen which can be used in stead...
 ```yaml
-type: custom:switch-port-card
-entity_prefix: mainswitch
-total_ports: 28
-sfp_start_port: 25
+  type: custom:switch-port-card
+  entity_prefix: mainswitch
+  total_ports: 28
+  sfp_start_port: 25
+  name: XGS1935 Switch
+  compact_mode: false
+  entity_port_names: sensor.mainswitch_port_name
+  entity_port_vlan: sensor.mainswitch_port_vlan
+  entity_port_rx: sensor.mainswitch_port_rx
+  entity_port_tx: sensor.mainswitch_port_tx
+  show_system_info: true
+  entity_cpu: sensor.mainswitch_cpu
+  entity_mem: sensor.mainswitch_mem
 copper_label: GIGABIT
 sfp_label: 10G SFP+
 name: Main Switch
 ```
+
+## Changelog
+See CHANGELOG.md
+
+## Issues
+Report at GitHub Issues
