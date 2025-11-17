@@ -1,0 +1,1862 @@
+
+# System Name
+  - platform: snmp
+    host: !secret snmp_host
+    community: !secret snmp_community
+    name: Mainswitch Name
+    scan_interval: 86400
+    baseoid: !secret snmp_baseoid_switchname
+    accept_errors: true
+    unique_id: mainswitch_system_name
+    version: !secret snmp_version
+
+  # Uptime (formatted)
+  - platform: snmp
+    host: !secret snmp_host
+    community: !secret snmp_community
+    name: Mainswitch Uptime
+    scan_interval: 300
+    baseoid: !secret snmp_baseoid_uptime
+    accept_errors: true
+    unique_id: mainswitch_system_uptime
+    version: !secret snmp_version
+    value_template: >-
+      {% set days = (value | int / 8640000) | int %}
+      {% set hours = ((value | int / 360000) % 24) | int %}
+      {% set mins = ((value | int / 6000) % 60) | int %}
+      {{ days }}d {{ hours }}h {{ mins }}m
+
+  # Firmware (extract version)
+  - platform: snmp
+    host: !secret snmp_host
+    community: !secret snmp_community
+    name: Mainswitch Firmware
+    scan_interval: 86400
+    baseoid: !secret snmp_baseoid_firmware
+    accept_errors: true
+    unique_id: mainswitch_system_firmware
+    version: !secret snmp_version
+
+  - platform: snmp
+    host: !secret snmp_host
+    community: !secret snmp_community
+    version: !secret snmp_version
+    name: Mainswitch CPU Load
+    baseoid: !secret snmp_baseoid_cpuload
+    scan_interval: 10
+    accept_errors: true
+    unique_id: Mainswitch_cpu_load
+    unit_of_measurement: "%"
+    state_class: measurement
+    
+  - platform: snmp
+    host: !secret snmp_host
+    community: !secret snmp_community
+    version: !secret snmp_version
+    name: Mainswitch Mem Load
+    baseoid: !secret snmp_baseoid_memload
+    scan_interval: 10
+    accept_errors: true
+    unique_id: Mainswitch_mem_load
+    unit_of_measurement: "%"
+    state_class: measurement
+
+  # === PORT NAME (Ports 1–28) ===
+  - platform: snmp
+    name: Mainswitch Port name 1
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.1
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_1
+
+  - platform: snmp
+    name: Mainswitch Port name 2
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.2
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_2
+
+  - platform: snmp
+    name: Mainswitch Port name 3
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.3
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_3
+
+  - platform: snmp
+    name: Mainswitch Port name 4
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.4
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_4
+
+  - platform: snmp
+    name: Mainswitch Port name 5
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.5
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_5
+
+  - platform: snmp
+    name: Mainswitch Port name 6
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.6
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_6
+
+  - platform: snmp
+    name: Mainswitch Port name 7
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.7
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_7
+
+  - platform: snmp
+    name: Mainswitch Port name 8
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.8
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_8
+
+  - platform: snmp
+    name: Mainswitch Port name 9
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.9
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_9
+
+  - platform: snmp
+    name: Mainswitch Port name 10
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.10
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_10
+
+  - platform: snmp
+    name: Mainswitch Port name 11
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.11
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_11
+
+  - platform: snmp
+    name: Mainswitch Port name 12
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.12
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_12
+
+  - platform: snmp
+    name: Mainswitch Port name 13
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.13
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_13
+
+  - platform: snmp
+    name: Mainswitch Port name 14
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.14
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_14
+
+  - platform: snmp
+    name: Mainswitch Port name 15
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.15
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_15
+
+  - platform: snmp
+    name: Mainswitch Port name 16
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.16
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_16
+
+  - platform: snmp
+    name: Mainswitch Port name 17
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.17
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_17
+
+  - platform: snmp
+    name: Mainswitch Port name 18
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.18
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_18
+
+  - platform: snmp
+    name: Mainswitch Port name 19
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.19
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_19
+
+  - platform: snmp
+    name: Mainswitch Port name 20
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.20
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_20
+
+  - platform: snmp
+    name: Mainswitch Port name 21
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.21
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_21
+
+  - platform: snmp
+    name: Mainswitch Port name 22
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.22
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_22
+
+  - platform: snmp
+    name: Mainswitch Port name 23
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.23
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_23
+
+  - platform: snmp
+    name: Mainswitch Port name 24
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.24
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_24
+
+  - platform: snmp
+    name: Mainswitch Port name 25
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.25
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_25
+
+  - platform: snmp
+    name: Mainswitch Port name 26
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.26
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_26
+
+  - platform: snmp
+    name: Mainswitch Port name 27
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.27
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_27
+
+  - platform: snmp
+    name: Mainswitch Port name 28
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.4.1.890.1.15.3.61.1.1.1.3.28
+    scan_interval: 84600
+    version: !secret snmp_version
+    unique_id: mainswitch_port_name_28
+
+# === PORT Speeds ===
+# === PORT Speeds ===
+# === PORT Speeds ===
+# === PORT Speeds ===
+# === PORT Speeds ===
+# === PORT Speeds ===
+# === PORT Speeds ===
+
+
+
+
+  - platform: snmp
+    name: Mainswitch Port Speed 1
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.1
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_1
+
+  - platform: snmp
+    name: Mainswitch Port Speed 2
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.2
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_2
+
+  - platform: snmp
+    name: Mainswitch Port Speed 3
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.3
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_3
+
+  - platform: snmp
+    name: Mainswitch Port Speed 4
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.4
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_4
+
+  - platform: snmp
+    name: Mainswitch Port Speed 5
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.5
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_5
+
+  - platform: snmp
+    name: Mainswitch Port Speed 6
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.6
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_6
+
+  - platform: snmp
+    name: Mainswitch Port Speed 7
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.7
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_7
+
+  - platform: snmp
+    name: Mainswitch Port Speed 8
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.8
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_8
+
+  - platform: snmp
+    name: Mainswitch Port Speed 9
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.9
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_9
+  - platform: snmp
+    name: Mainswitch Port Speed 10
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.10
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_10
+
+  - platform: snmp
+    name: Mainswitch Port Speed 11
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.11
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_11
+
+  - platform: snmp
+    name: Mainswitch Port Speed 12
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.12
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_12
+
+  - platform: snmp
+    name: Mainswitch Port Speed 13
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.13
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_13
+
+  - platform: snmp
+    name: Mainswitch Port Speed 14
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.14
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_14
+
+  - platform: snmp
+    name: Mainswitch Port Speed 15
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.15
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_15
+
+  - platform: snmp
+    name: Mainswitch Port Speed 16
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.16
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_16
+
+  - platform: snmp
+    name: Mainswitch Port Speed 17
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.17
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_17
+
+  - platform: snmp
+    name: Mainswitch Port Speed 18
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.18
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_18
+
+  - platform: snmp
+    name: Mainswitch Port Speed 19
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.19
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_19
+
+  - platform: snmp
+    name: Mainswitch Port Speed 20
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.20
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_20
+
+  - platform: snmp
+    name: Mainswitch Port Speed 21
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.21
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_21
+
+  - platform: snmp
+    name: Mainswitch Port Speed 22
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.22
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_22
+
+  - platform: snmp
+    name: Mainswitch Port Speed 23
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.23
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_23
+
+  - platform: snmp
+    name: Mainswitch Port Speed 24
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.24
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_24
+
+  - platform: snmp
+    name: Mainswitch Port Speed 25
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.25
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_25
+
+  - platform: snmp
+    name: Mainswitch Port Speed 26
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.26
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_26
+
+  - platform: snmp
+    name: Mainswitch Port Speed 27
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.27
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_27
+
+  - platform: snmp
+    name: Mainswitch Port Speed 28
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.5.28
+    version: !secret snmp_version
+    unique_id: mainswitch_port_speed_28
+
+# === PORT VLAN ===
+# === PORT VLAN ===
+# === PORT VLAN ===
+# === PORT VLAN ===
+# === PORT VLAN ===
+
+
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 1
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.1
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_1
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 2
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.2
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_2
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 3
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.3
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_3
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 4
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.4
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_4
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 5
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.5
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_5
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 6
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.6
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_6
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 7
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.7
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_7
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 8
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.8
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_8
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 9
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.9
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_9
+  - platform: snmp
+    name: Mainswitch Port Vlan 10
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.10
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_10
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 11
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.11
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_11
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 12
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.12
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_12
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 13
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.13
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_13
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 14
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.14
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_14
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 15
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.15
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_15
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 16
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.16
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_16
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 17
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.17
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_17
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 18
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.18
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_18
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 19
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.19
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_19
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 20
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.20
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_20
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 21
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.21
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_21
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 22
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.22
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_22
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 23
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.23
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_23
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 24
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.24
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_24
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 25
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.25
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_25
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 26
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.26
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_26
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 27
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.27
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_27
+
+  - platform: snmp
+    name: Mainswitch Port Vlan 28
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.17.7.1.4.5.1.1.28
+    version: !secret snmp_version
+    unique_id: mainswitch_port_vlan_28
+
+# === PORT RX ===
+# === PORT RX ===
+# === PORT RX ===
+# === PORT RX ===
+# === PORT RX ===
+# === PORT RX ===
+
+
+
+  - platform: snmp
+    name: Mainswitch Port RX 1
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.1
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_1
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 2
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.2
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_2
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 3
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.3
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_3
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 4
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.4
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_4
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 5
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.5
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_5
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 6
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.6
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_6
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 7
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.7
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_7
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 8
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.8
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_8
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 9
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.9
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_9
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+
+  - platform: snmp
+    name: Mainswitch Port RX 10
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.10
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_10
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 11
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.11
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_11
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 12
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.12
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_12
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 13
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.13
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_13
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 14
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.14
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_14
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 15
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.15
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_15
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 16
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.16
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_16
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 17
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.17
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_17
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 18
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.18
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_18
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 19
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.19
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_19
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 20
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.20
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_20
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 21
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.21
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_21
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 22
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.22
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_22
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 23
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.23
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_23
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 24
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.24
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_24
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 25
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.25
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_25
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 26
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.26
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_26
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 27
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.27
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_27
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port RX 28
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.10.28
+    version: !secret snmp_version
+    unique_id: mainswitch_port_rx_28
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+# === PORT TX ===
+# === PORT TX ===
+# === PORT TX ===
+# === PORT TX ===
+# === PORT TX ===
+
+
+
+  - platform: snmp
+    name: Mainswitch Port TX 1
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.1
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_1
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 2
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.2
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_2
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 3
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.3
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_3
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 4
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.4
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_4
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 5
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.5
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_5
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 6
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.6
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_6
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 7
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.7
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_7
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 8
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.8
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_8
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 9
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.9
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_9
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 10
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.10
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_10
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 11
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.11
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_11
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 12
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.12
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_12
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 13
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.13
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_13
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 14
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.14
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_14
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 15
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.15
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_15
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 16
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.16
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_16
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 17
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.17
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_17
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 18
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.18
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_18
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 19
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.19
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_19
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 20
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.20
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_20
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 21
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.21
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_21
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 22
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.22
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_22
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 23
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.23
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_23
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 24
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.24
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_24
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 25
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.25
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_25
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 26
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.26
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_26
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 27
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.27
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_27
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
+
+  - platform: snmp
+    name: Mainswitch Port TX 28
+    host: !secret snmp_host
+    community: !secret snmp_community
+    baseoid: 1.3.6.1.2.1.2.2.1.16.28
+    version: !secret snmp_version
+    unique_id: mainswitch_port_tx_28
+    value_template: >-
+      {% set bytes = value | int %}
+      {% if bytes >= 1073741824 %}
+        {{ '%.2f GiB' % (bytes / 1073741824) }}
+      {% elif bytes >= 1048576 %}
+        {{ '%.2f MiB' % (bytes / 1048576) }}
+      {% elif bytes >= 1024 %}
+        {{ '%.2f KiB' % (bytes / 1024) }}
+      {% else %}
+        {{ bytes }} B
+      {% endif %}
