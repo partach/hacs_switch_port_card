@@ -8,5 +8,6 @@
   "issue_tracker": "https://github.com/partach/hacs_switch_port_card/issues",
   "code_owners": ["partach"],
   "iot_class": "local_polling"
+  "render_readme": true
   "homeassistant": "2023.6.0"
 }
