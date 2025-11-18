@@ -2,13 +2,9 @@
   "name": "Switch Port Card",
   "content_type": "plugin",
   "filename": "switch-port-card.js",
-  "version": "1.0.1",
   "content_in_root": false,
-  "requirements": [],
   "documentation": "https://github.com/partach/hacs_switch_port_card/blob/main/README.md",
   "issue_tracker": "https://github.com/partach/hacs_switch_port_card/issues",
   "code_owners": ["partach"],
-  "iot_class": "local_polling"
   "render_readme": true
-  "homeassistant": "2023.6.0"
 }
