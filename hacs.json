@@ -5,6 +5,5 @@
   "content_in_root": false,
   "documentation": "https://github.com/partach/hacs_switch_port_card/blob/main/README.md",
   "issue_tracker": "https://github.com/partach/hacs_switch_port_card/issues",
-  "code_owners": ["partach"],
   "render_readme": true
 }
