@@ -2,7 +2,5 @@
   "name": "Switch Port Card",
   "filename": "switch-port-card.js",
   "content_in_root": false,
-  "documentation": "https://github.com/partach/hacs_switch_port_card/blob/main/README.md",
-  "issue_tracker": "https://github.com/partach/hacs_switch_port_card/issues",
   "render_readme": true
 }
