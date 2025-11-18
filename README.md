@@ -47,15 +47,16 @@ So, when defining your sensor / switch entities make sure to check if the baseoi
 - Dark / Light Mode
 
 ## Installation
-1. Working on HACS version, coming soon
-2. Install manually by placing the `switch-port-card.js` file in `www\community\` directory (make subdir switch-port-card and put it there)
+1. Working on HACS version, coming soon.
+2. Already possible to add as HACS--> custom repositories --> repo: partach/hacs-switch-port-card, Type:Dashboard
+3. Install manually by placing the `switch-port-card.js` file in `www\community\` directory (make subdir switch-port-card and put it there)
 
     * In HA go to Settings > Dashboards > Resources
     * Add: 
       * URL: `/local/community/switch-port-card/switch-port-card.js`
       * Type: `JavaScript Module`
 
-3. Add to Lovelace:
+4. Add to Lovelace:
 Only for those doing it the old way (under 2. way is better)
 ```yaml
 type: custom:switch-port-card
