@@ -1,6 +1,5 @@
 {
   "name": "Switch Port Card",
-  "content_type": "plugin",
   "filename": "switch-port-card.js",
   "content_in_root": false,
   "documentation": "https://github.com/partach/hacs_switch_port_card/blob/main/README.md",
