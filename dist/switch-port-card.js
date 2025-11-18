@@ -11,6 +11,7 @@ class SwitchPortCard extends HTMLElement {
       sfp_start_port: 25,
       name: "Switch Ports",
       compact_mode: false,
+      even_ports_on_top: false,
       entity_port_names: "",
       entity_port_vlan: "",
       entity_port_rx: "",
@@ -36,6 +37,7 @@ class SwitchPortCard extends HTMLElement {
       show_legend: true,
       show_system_info: false,
       compact_mode: false,
+      even_ports_on_top: false,
       entity_port_names: '',
       entity_port_vlan: '',
       entity_port_rx: '',
@@ -101,8 +103,47 @@ class SwitchPortCard extends HTMLElement {
       : null;
 
     const formatBytes = (raw) => {
-      return raw ? String(raw).trim() : '';
+      if (!raw) return '-';
+
+      const str = String(raw).trim();
+
+      // Match number + unit (handles "2.77 GiB", "112.23 MiB", "0 B", "1234 kB", etc.)
+      const match = str.match(/^([\d.]+)\s*([kmtg]i?B)$/i);
+      if (!match) {
+        // Special case: "0 B", "0 GiB", etc.
+        const zero = str.match(/^0\s*([kmtg]i?B)$/i);
+        if (zero) return `0 ${zero[1].toUpperCase()}`;
+        return raw;
+      }
+
+      let value = parseFloat(match[1]);
+      const unit = match[2].toUpperCase();
+
+      // If value is 0 → just show "0 X"
+      if (value === 0) return `0 ${unit}`;
+
+      // Smart formatting: max 4 visible characters (digits + dot)
+      let rounded;
+      if (value >= 1000) {
+        rounded = Math.round(value);           // 1123.4 → 1123  (4 digits)
+      } else if (value >= 100) {
+        rounded = Math.round(value * 10) / 10; // 112.23 → 112.2 (4 chars)
+      } else if (value >= 10) {
+        rounded = Math.round(value * 100) / 100; // 11.123 → 11.12 → 11.1
+      } else {
+        rounded = Math.round(value * 1000) / 1000; // 1.1123 → 1.112
+      }
+
+      // Convert to string and remove trailing zeros after decimal
+      const strVal = rounded % 1 === 0 ? String(rounded) : rounded.toFixed(
+        rounded >= 100 ? 1 :
+        rounded >= 10  ? 1 :
+        rounded >= 1   ? 2 : 3
+      ).replace(/\.?0+$/, '');
+
+      return `${strVal} ${unit}`;
     };
+
     return {
       vlan: vlanEnt?.state && !['unknown', 'unavailable'].includes(vlanEnt.state) ? vlanEnt.state : '',
       rx: rxEnt?.state ? formatBytes(rxEnt.state) : '',
@@ -111,12 +152,14 @@ class SwitchPortCard extends HTMLElement {
   }
 
   _getColor(status) {
-    if (status === 'DOWN') return '#555';
+    if (status === 'DOWN') return '#666666';
     if (status === 'UNAVAIL') return '#444';
     if (status === 'DM') return '#ff6b35';
-    if (/10M|100M/.test(status)) return '#ff6b35';
-    if (/1G/.test(status)) return '#4caf50';
-    if (/10G/.test(status)) return '#2196f3';
+    if (/10M|100M/.test(status)) return '#ee6b35';
+    if (/1G/.test(status)) return '#2c6f50';
+    if (/2.5G/.test(status)) return '#2196f3';
+    if (/5G/.test(status)) return '#2176f3';
+    if (/10G/.test(status)) return '#1156f3';
     return '#f44336';
   }
 
@@ -125,8 +168,8 @@ class SwitchPortCard extends HTMLElement {
     const c = this._config.compact_mode;
     const opacity = status === 'DOWN' || status === 'UNAVAIL' ? 0.6 : 1;
     const isSfp = i >= this._sfpStart;
-    const baseSize = c ? 26 : 30;
-    const height = isSfp ? (c ? 26 : 30) : (c ? 28 : 30);
+    const baseSize = c ? 28 : 30;
+    const height = isSfp ? (c ? 28 : 30) : (c ? 28 : 30);
     const boxW = c ? baseSize : 30;
     const gap = c ? 0 : 1;
 
@@ -180,18 +223,28 @@ class SwitchPortCard extends HTMLElement {
 
   _renderCopperRows() {
     if (this._copperPorts.length === 0) return '';
-    const even = this._copperPorts.filter(p => p % 2 === 0);
-    const odd = this._copperPorts.filter(p => p % 2 === 1);
+    
     const c = this._config.compact_mode;
+    const evenOnTop = this._config.even_ports_on_top === true;
+
+    // Decide which row goes on top
+    const topRowPorts    = evenOnTop ? this._copperPorts.filter(p => p % 2 === 0) : this._copperPorts.filter(p => p % 2 === 1);
+    const bottomRowPorts = evenOnTop ? this._copperPorts.filter(p => p % 2 === 1) : this._copperPorts.filter(p => p % 2 === 0);
+
     let html = `<div style="margin:${c?4:8}px 0 ${c?3:6}px;color:#999;font-size:${c?9:10}px;font-weight:600;text-align:center;">
                   ${this._config.copper_label}
                 </div>`;
+    
+    // Top row
     html += `<div style="display:flex;justify-content:center;gap:${c?1:1}px;margin-bottom:${c?1:3}px;">`;
-    even.forEach(p => html += this._renderPort(p, this._getPortStatus(p)));
+    topRowPorts.forEach(p => html += this._renderPort(p, this._getPortStatus(p)));
     html += `</div>`;
+    
+    // Bottom row
     html += `<div style="display:flex;justify-content:center;gap:${c?1:1}px;margin-bottom:${c?4:8}px;">`;
-    odd.forEach(p => html += this._renderPort(p, this._getPortStatus(p)));
+    bottomRowPorts.forEach(p => html += this._renderPort(p, this._getPortStatus(p)));
     html += `</div>`;
+    
     return html;
   }
 
@@ -215,13 +268,17 @@ class SwitchPortCard extends HTMLElement {
     const c = this._config.compact_mode;
     const fs = c ? 6 : 9;
     const g = c ? 6 : 12;
-    return `
-      <div style="display:flex;gap:${g}px;font-size:${fs}px;color:#aaa;white-space:nowrap;align-items:center;">
-        <span><span style="color:#ff6b35;">\u23F9</span> 10/100/DM</span>
-        <span><span style="color:#4caf50;">\u23F9</span> 1G</span>
-        <span><span style="color:#2196f3;">\u23F9</span> 10G</span>
-        <span><span style="color:#555;">\u23F9</span> Down</span>
+    let html = `<div style="display:flex;font-size:${fs}px;gap:${g}px;">&nbsp</div>`;
+    html += `<div style="display:flex;font-size:${fs}px;gap:${g}px;">&nbsp</div>`;
+    html += `<div style="display:flex;font-size:${fs}px;gap:${g}px;">&nbsp</div>`;
+    html += `
+      <div style="display:flex;gap:${g}px;justify-content:bottom;font-size:${fs}px;color:#aaa;white-space:nowrap;align-items:center;">
+        <span><span style="color:#ff6b35;">\u25A0</span> 10/100/DM</span>
+        <span><span style="color:#4caf50;">\u25A0</span> 1G</span>
+        <span><span style="color:#1156f3;">\u25A0</span> 10G</span>
+        <span><span style="color:#666666;">\u25A0</span> Down</span>
       </div>`;
+    return html;
   }
 
   _renderBarGauge(entityId, label) {
@@ -399,7 +456,7 @@ class SwitchPortCardEditor extends HTMLElement {
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-weight:500;font-size:14px;">Entity Prefix</label>
           <input type="text" data-config="entity_prefix" value="${this._config.entity_prefix}" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
-          <div style="font-size:12px;color:#666;">Example: "mainswitch" → switch.mainswitch_port_1</div>
+          <div style="font-size:12px;color:#666;">Example: "mainswitch" ? switch.mainswitch_port_1</div>
         </div>
         <div style="display:flex;gap:16px;">
           <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
@@ -427,22 +484,22 @@ class SwitchPortCardEditor extends HTMLElement {
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-weight:500;font-size:14px;">Port Name Prefix</label>
           <input type="text" data-config="entity_port_names" value="${this._config.entity_port_names}" placeholder="sensor.mainswitch_port_name" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
-          <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_name_1, _2, etc.</div>
+          <div style="font-size:12px;color:#666;">? sensor.mainswitch_port_name_1, _2, etc.</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-weight:500;font-size:14px;">Port VLAN Prefix</label>
           <input type="text" data-config="entity_port_vlan" value="${this._config.entity_port_vlan}" placeholder="sensor.mainswitch_port_vlan" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
-          <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_vlan_1, _2, etc.</div>
+          <div style="font-size:12px;color:#666;">? sensor.mainswitch_port_vlan_1, _2, etc.</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-weight:500;font-size:14px;">Port RX Prefix</label>
           <input type="text" data-config="entity_port_rx" value="${this._config.entity_port_rx}" placeholder="sensor.mainswitch_port_rx" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
-          <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_rx_1, _2, etc. (bytes)</div>
+          <div style="font-size:12px;color:#666;">? sensor.mainswitch_port_rx_1, _2, etc. (bytes)</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-weight:500;font-size:14px;">Port TX Prefix</label>
           <input type="text" data-config="entity_port_tx" value="${this._config.entity_port_tx}" placeholder="sensor.mainswitch_port_tx" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
-          <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_tx_1, _2, etc. (bytes)</div>
+          <div style="font-size:12px;color:#666;">? sensor.mainswitch_port_tx_1, _2, etc. (bytes)</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
           <input type="checkbox" data-config="show_legend" ${this._config.show_legend ? 'checked' : ''} style="width:18px;height:18px;cursor:pointer;"/>
@@ -452,6 +509,10 @@ class SwitchPortCardEditor extends HTMLElement {
           <input type="checkbox" data-config="compact_mode" ${this._config.compact_mode ? 'checked' : ''} style="width:18px;height:18px;cursor:pointer;"/>
           <label style="font-weight:500;font-size:14px;cursor:pointer;">Compact Mode</label>
         </div>
+	<div style="display:flex;align-items:center;gap:8px;">
+ 	 <input type="checkbox" data-config="even_ports_on_top" ${this._config.even_ports_on_top ? 'checked' : ''} style="width:18px;height:18px;cursor:pointer;"/>
+ 	 <label style="font-weight:500;font-size:14px;cursor:pointer;">Even ports on top row (2,4,6… first)</label>
+	</div>
         <div style="font-size:16px;font-weight:600;color:#333;border-bottom:2px solid #e0e0e0;padding-bottom:8px;margin-top:8px;">
           System Information (Optional)
         </div>
