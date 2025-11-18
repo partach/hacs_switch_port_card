@@ -1,6 +1,6 @@
 {
   "name": "Switch Port Card",
-  "content_type": "lovelace",
+  "content_type": "plugin",
   "version": "1.0.0",
   "requirements": [],
   "documentation": "https://github.com/partach/hacs_switch_port_card/blob/main/README.md",
