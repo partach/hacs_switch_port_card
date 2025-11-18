@@ -42,20 +42,21 @@ So, when defining your sensor / switch entities make sure to check if the baseoi
 - Cpu load and memory load indication (optional as well)
 - Compact mode (for smaller dashboards)
 - Hover Tooltip per port showing status details per port
-- Configuration screen
+- Card Configuration screen
 - Works with defined entities `switch.mainswitch_port_X` + `sensor.mainswitch_port_speed_X` + optional (see below)
 - Dark / Light Mode
 
 ## Installation
-1. Install in first instance is by hand by placing the `switch-port-card.js` file in `www\community\` directory (make subdir switch-port-card and put it there)
+1. Working on HACS version, coming soon
+2. Install manually by placing the `switch-port-card.js` file in `www\community\` directory (make subdir switch-port-card and put it there)
 
     * In HA go to Settings > Dashboards > Resources
     * Add: 
       * URL: `/local/community/switch-port-card/switch-port-card.js`
       * Type: `JavaScript Module`
 
-2. Add to Lovelace:
-Only for those doing it the old way (above way is better)
+3. Add to Lovelace:
+Only for those doing it the old way (under 2. way is better)
 ```yaml
 type: custom:switch-port-card
 name: Main Switch
@@ -64,15 +65,14 @@ name: Main Switch
 You need to enable SNMP in your switch. This is different per manufacturer, please follow the switch manual (don't ask me).
 What is important that you need:
  * SNMP enabled (duh; although tricky to find on some switches)
- * Define the community string (per default this is named `public` but you can change for slightly better security). Also needed by HA
+ * Define the community string (per default this is named `public` but you can change for slightly better security). Info is needed by HA entities
  * The example uses SNMP Version v2C that you should set both at switch side and at HA sensor side (see below)
  * Set target IP trap desitnation towards your HA IP
  * Some switches require different additional details settings (follow manufacturer manual)
 
 ## Adding the needed sensors to HA
-Below you can add directly to your configuration.yaml, but better to add to seperate file (see above tip)
-Add these entities below per port you have (first card assumes existence of 28 ports of which 4 are SPF)
---> if you want to change you can change the switch-port-card.js settings
+Below you can add directly to your configuration.yaml, but better to add to seperate file (see above tip and see 2 example files)
+Add these entities below per port you have (default card setting is 28 ports of which 4 are SPF, but is configurable)
 
 When defining 'Sensor entities'
 `!!for x=1 to x=the number of ports your switch has!!`
@@ -246,7 +246,7 @@ The card has a configuration screen which can be used in stead...
   entity_prefix: mainswitch
   total_ports: 28
   sfp_start_port: 25
-  name: XGS1935 Switch
+  name: Main Switch
   compact_mode: false
   entity_port_names: sensor.mainswitch_port_name
   entity_port_vlan: sensor.mainswitch_port_vlan
@@ -255,9 +255,8 @@ The card has a configuration screen which can be used in stead...
   show_system_info: true
   entity_cpu: sensor.mainswitch_cpu
   entity_mem: sensor.mainswitch_mem
-copper_label: GIGABIT
-sfp_label: 10G SFP+
-name: Main Switch
+  copper_label: GIGABIT
+  sfp_label: 10G SFP+
 ```
 
 ## Changelog
