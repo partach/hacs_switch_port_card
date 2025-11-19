@@ -1,4 +1,4 @@
-# hacs_switch_port_card
+# Switch_port_card
 This Home Assistant card shows the status of your switch ports.
 BE WARNED: requires some manual actions in HA and your switch...
 
@@ -48,7 +48,7 @@ So, when defining your sensor / switch entities make sure to check if the baseoi
 
 ## Installation
 1. Working on HACS version, coming soon.
-2. Already possible to add as HACS--> custom repositories --> repo: partach/hacs-switch-port-card, Type:Dashboard
+2. Already possible to add as HACS--> custom repositories --> repo: partach/switch-port-card, Type:Dashboard
 3. Install manually by placing the `switch-port-card.js` file in `www\community\` directory (make subdir switch-port-card and put it there)
 
     * In HA go to Settings > Dashboards > Resources
