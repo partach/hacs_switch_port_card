@@ -15,7 +15,12 @@ class SwitchPortCard extends HTMLElement {
       entity_port_names: "",
       entity_port_vlan: "",
       entity_port_rx: "",
-      entity_port_tx: ""
+      entity_port_tx: "",
+      entity_name: "",
+      entity_firmware: "",
+      entity_uptime: "",
+      entity_cpu: "",
+      entity_memory: ""
     };
   }
 
@@ -268,17 +273,13 @@ class SwitchPortCard extends HTMLElement {
     const c = this._config.compact_mode;
     const fs = c ? 6 : 9;
     const g = c ? 6 : 12;
-    let html = `<div style="display:flex;font-size:${fs}px;gap:${g}px;">&nbsp</div>`;
-    html += `<div style="display:flex;font-size:${fs}px;gap:${g}px;">&nbsp</div>`;
-    html += `<div style="display:flex;font-size:${fs}px;gap:${g}px;">&nbsp</div>`;
-    html += `
-      <div style="display:flex;gap:${g}px;justify-content:bottom;font-size:${fs}px;color:#aaa;white-space:nowrap;align-items:center;">
+    return `
+      <div style="display:flex;gap:${g}px;font-size:${fs}px;color:#aaa;white-space:nowrap;align-items:center;">
         <span><span style="color:#ff6b35;">\u25A0</span> 10/100/DM</span>
-        <span><span style="color:#4caf50;">\u25A0</span> 1G</span>
+        <span><span style="color:#2c6f50;">\u25A0</span> 1G</span>
         <span><span style="color:#1156f3;">\u25A0</span> 10G</span>
         <span><span style="color:#666666;">\u25A0</span> Down</span>
       </div>`;
-    return html;
   }
 
   _renderBarGauge(entityId, label) {
@@ -361,7 +362,7 @@ class SwitchPortCard extends HTMLElement {
 
     const sys = this._renderSystemInfo();
     const leg = this._renderLegend();
-    const cop = this._renderCopperRows();  // Fixed: no "Coppa"
+    const cop = this._renderCopperRows();
     const sfp = this._renderSfp();
 
     let mid = '';
@@ -395,7 +396,7 @@ class SwitchPortCard extends HTMLElement {
   getCardSize() { return 3; }
 }
 
-// ===== CARD EDITOR (unchanged from your original) =====
+// ===== CARD EDITOR =====
 class SwitchPortCardEditor extends HTMLElement {
   setConfig(config) {
     this._config = {
@@ -408,6 +409,7 @@ class SwitchPortCardEditor extends HTMLElement {
       show_legend: true,
       show_system_info: false,
       compact_mode: false,
+      even_ports_on_top: false,
       entity_port_names: '',
       entity_port_vlan: '',
       entity_port_rx: '',
@@ -456,7 +458,7 @@ class SwitchPortCardEditor extends HTMLElement {
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-weight:500;font-size:14px;">Entity Prefix</label>
           <input type="text" data-config="entity_prefix" value="${this._config.entity_prefix}" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
-          <div style="font-size:12px;color:#666;">Example: "mainswitch" ? switch.mainswitch_port_1</div>
+          <div style="font-size:12px;color:#666;">Example: "mainswitch" → switch.mainswitch_port_1</div>
         </div>
         <div style="display:flex;gap:16px;">
           <div style="flex:1;display:flex;flex-direction:column;gap:4px;">
@@ -484,22 +486,22 @@ class SwitchPortCardEditor extends HTMLElement {
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-weight:500;font-size:14px;">Port Name Prefix</label>
           <input type="text" data-config="entity_port_names" value="${this._config.entity_port_names}" placeholder="sensor.mainswitch_port_name" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
-          <div style="font-size:12px;color:#666;">? sensor.mainswitch_port_name_1, _2, etc.</div>
+          <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_name_1, _2, etc.</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-weight:500;font-size:14px;">Port VLAN Prefix</label>
           <input type="text" data-config="entity_port_vlan" value="${this._config.entity_port_vlan}" placeholder="sensor.mainswitch_port_vlan" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
-          <div style="font-size:12px;color:#666;">? sensor.mainswitch_port_vlan_1, _2, etc.</div>
+          <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_vlan_1, _2, etc.</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-weight:500;font-size:14px;">Port RX Prefix</label>
           <input type="text" data-config="entity_port_rx" value="${this._config.entity_port_rx}" placeholder="sensor.mainswitch_port_rx" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
-          <div style="font-size:12px;color:#666;">? sensor.mainswitch_port_rx_1, _2, etc. (bytes)</div>
+          <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_rx_1, _2, etc. (bytes)</div>
         </div>
         <div style="display:flex;flex-direction:column;gap:4px;">
           <label style="font-weight:500;font-size:14px;">Port TX Prefix</label>
           <input type="text" data-config="entity_port_tx" value="${this._config.entity_port_tx}" placeholder="sensor.mainswitch_port_tx" style="padding:8px;border:1px solid #ccc;border-radius:4px;font-size:14px;"/>
-          <div style="font-size:12px;color:#666;">? sensor.mainswitch_port_tx_1, _2, etc. (bytes)</div>
+          <div style="font-size:12px;color:#666;">→ sensor.mainswitch_port_tx_1, _2, etc. (bytes)</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px;">
           <input type="checkbox" data-config="show_legend" ${this._config.show_legend ? 'checked' : ''} style="width:18px;height:18px;cursor:pointer;"/>
