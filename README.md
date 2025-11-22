@@ -1,4 +1,11 @@
 # Switch_port_card
+[![Home Assistant](https://img.shields.io/badge/Home_Assistant-00A1DF?style=flat-square&logo=home-assistant&logoColor=white)](https://www.home-assistant.io)
+[![HACS](https://img.shields.io/badge/HACS-Default-41BDF5?style=flat-square)](https://hacs.xyz)
+[![HACS Action](https://img.shields.io/github/actions/workflow/status/partach/switch_port_card/validate-hacs.yml?label=HACS%20Action&style=flat-square)](https://github.com/partach/switch_port_card/actions)
+[![Installs](https://img.shields.io/github/downloads/partach/switch_port_card/total?color=28A745&label=Installs&style=flat-square)](https://github.com/partach/switch_port_card/releases)
+[![License](https://img.shields.io/github/license/partach/switch_port_card?color=ffca28&style=flat-square)](https://github.com/partach/switch_port_card/blob/main/LICENSE)
+[![HACS validated](https://img.shields.io/badge/HACS-validated-41BDF5?style=flat-square)](https://github.com/hacs/integration)
+
 This Home Assistant card shows the status of your switch ports.
 BE WARNED: requires some manual actions in HA and your switch...
 
