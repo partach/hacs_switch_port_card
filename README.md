@@ -272,3 +272,8 @@ See CHANGELOG.md
 
 ## Issues
 Report at GitHub Issues
+
+## support development
+If you want to support this and future developments it would be greatly appreciated
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg?style=flat-square)](https://paypal.me/therealbean)
