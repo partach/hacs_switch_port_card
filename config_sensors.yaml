@@ -798,11 +798,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -817,11 +817,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -836,11 +836,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -855,11 +855,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -874,11 +874,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -893,11 +893,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -912,11 +912,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -931,11 +931,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -950,11 +950,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -970,11 +970,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -989,11 +989,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1008,11 +1008,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1027,11 +1027,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1046,11 +1046,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1065,11 +1065,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1084,11 +1084,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1103,11 +1103,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1122,11 +1122,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1141,11 +1141,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1160,11 +1160,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1179,11 +1179,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1198,11 +1198,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1217,11 +1217,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1236,11 +1236,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1255,11 +1255,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1274,11 +1274,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1293,11 +1293,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1312,11 +1312,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1339,11 +1339,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1358,11 +1358,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1377,11 +1377,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1396,11 +1396,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1415,11 +1415,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1434,11 +1434,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1453,11 +1453,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1472,11 +1472,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1491,11 +1491,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1510,11 +1510,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1529,11 +1529,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1548,11 +1548,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1567,11 +1567,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1586,11 +1586,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1605,11 +1605,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1624,11 +1624,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1643,11 +1643,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1662,11 +1662,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1681,11 +1681,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1700,11 +1700,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1719,11 +1719,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1738,11 +1738,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1757,11 +1757,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1776,11 +1776,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1795,11 +1795,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1814,11 +1814,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1833,11 +1833,11 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
@@ -1852,11 +1852,12 @@
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f kB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
+
