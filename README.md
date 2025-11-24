@@ -44,7 +44,7 @@ So, when defining your sensor / switch entities make sure to check if the baseoi
 (see below for details)
 
 ## Features
-- Indication of `10M`, `100M`, `1G`, `10G`, `DM`(Downsteam Mode), `DOWN`
+- Indication of `10M`, `100M`, `1G`, `10G`, `DOWN`
 - Optional indication of port name, vlan id, Rx speed, Tx speed
 - Cpu load and memory load indication (optional as well)
 - Compact mode (for smaller dashboards)
@@ -55,8 +55,8 @@ So, when defining your sensor / switch entities make sure to check if the baseoi
 
 ## Installation
 Options:
-1. Working on HACS version, coming soon.
-2. Already possible to add as HACS--> custom repositories --> repo: partach/switch-port-card, Type:Dashboard
+1. Available on HACS. Search for switch-port-card
+2. Add as Custom Repository (HACS--> custom repositories --> repo: partach/switch-port-card, Type:Dashboard)
 3. Install manually by placing the `switch-port-card.js` file in `www\community\` directory (make subdir switch-port-card and put it there)
 
     * In HA go to Settings > Dashboards > Resources
@@ -70,7 +70,7 @@ Only for those doing it the old way (Option 3 is preferred of this one)
 type: custom:switch-port-card
 name: Main Switch
 ```
-## Preparing your switch
+## Preparing your network switch
 You need to enable SNMP in your switch. This is different per manufacturer, please follow the switch manual (don't ask me).
 What is important that you need:
  * SNMP enabled (duh; although tricky to find on some switches)
@@ -160,11 +160,11 @@ sensor.mainswitch_port_speed_1 to 28 (speed in bps)
     value_template: >-
       {% set bytes = value | int %}
       {% if bytes >= 1073741824 %}
-        {{ '%.2f GiB' % (bytes / 1073741824) }}
+        {{ '%.2f GB' % (bytes / 1073741824) }}
       {% elif bytes >= 1048576 %}
-        {{ '%.2f MiB' % (bytes / 1048576) }}
+        {{ '%.2f MB' % (bytes / 1048576) }}
       {% elif bytes >= 1024 %}
-        {{ '%.2f KiB' % (bytes / 1024) }}
+        {{ '%.2f KB' % (bytes / 1024) }}
       {% else %}
         {{ bytes }} B
       {% endif %}
