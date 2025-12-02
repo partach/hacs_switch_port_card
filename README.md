@@ -9,6 +9,8 @@
 This Home Assistant card shows the status of your switch ports.
 BE WARNED: requires some manual actions in HA and your switch...
 
+There is an updated card including full SNMP integration that succeeds this card: https://github.com/partach/switch_port_card_pro
+
 <p align="center">
   <img src="https://github.com/partach/hacs_switch_port_card/blob/main/switch-port-card3.png" width="600"/>
   <br>
