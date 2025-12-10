@@ -1,4 +1,6 @@
 # Switch_port_card
+! This card has been superseeded by https://github.com/partach/switch_port_card_pro !
+
 [![Home Assistant](https://img.shields.io/badge/Home_Assistant-00A1DF?style=flat-square&logo=home-assistant&logoColor=white)](https://www.home-assistant.io)
 [![HACS](https://img.shields.io/badge/HACS-Default-41BDF5?style=flat-square)](https://hacs.xyz)
 [![HACS Action](https://img.shields.io/github/actions/workflow/status/partach/switch_port_card/validate-hacs.yml?label=HACS%20Action&style=flat-square)](https://github.com/partach/switch_port_card/actions)
